@@ -1,0 +1,17 @@
+
+
+body {
+    background-color: #151a1e;
+}
+
+
+.footer {
+    position: fixed;
+    background-color: #262d33;
+
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
