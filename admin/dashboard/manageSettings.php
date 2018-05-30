@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'database.php';
-require_once 'pagination.php';
+require_once 'include/database.php';
+require_once 'include/pagination.php';
 
 // Comprobar si usuario esta logeado
 if( !isset($_SESSION['sAdmin'])) {
@@ -12,7 +12,8 @@ $dbs = new DatabaseAdministration('settings');
 
 // Se filtran todos los valores de $_POST y se actualiza la db
 if( isset($_POST['save_settings']) ) {
-
+    unset($_POST['save_settings']);
+    $dbs->saveSettings($_POST);
 }
 
 
@@ -48,7 +49,15 @@ $settings = $dbs->getSettings();
             </div>
             <div class="col-sm-9">
                 <div class="jumbotron">
-
+                    <?php if(isset($ret['ERROR'])): ?>
+                        <div class="alert alert-danger">
+                            <?php echo $ret['ERROR']; ?>
+                        </div>
+                    <?php elseif(isset($ret['INFO'])): ?>
+                        <div class="alert alert-success">
+                            <?php echo $ret['INFO']; ?>
+                        </div>
+                    <?php endif; ?>
                     <form method="POST">
                         <fieldset class="form-group">
                             <legend>Fees</legend>
@@ -74,13 +83,13 @@ $settings = $dbs->getSettings();
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Procress withdrawls every minutes</label>
                                 <div class="col-sm-4">
-                                    <input type="number" name="buyfee" min="0.00" max="0.1" step="0.01" class="form-control-plaintext" value="<?php echo $settings['buyfee']; ?>">
+                                    <input type="number" name="" min="0.00" max="0.1" step="0.01" class="form-control-plaintext" value="<?php echo $settings['buyfee']; ?>">
                                 </div>
 
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Sell fee</label>
                                 <div class="col-sm-4">
-                                    <input type="number" name="sellfee" min="0.00" max="0.1" step="0.01" class="form-control-plaintext" value="<?php echo $settings['sellfee']; ?>">
+                                    <input type="number" name="" min="0.00" max="0.1" step="0.01" class="form-control-plaintext" value="<?php echo $settings['sellfee']; ?>">
                                 </div>
                             </div>
 

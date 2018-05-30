@@ -5,8 +5,8 @@ if( !isset($_SESSION['sAdmin'])) {
     //header('Location: ../login.php');
 }
 
-require_once 'database.php';
-require_once 'pagination.php';
+require_once 'include/database.php';
+require_once 'include/pagination.php';
 
 // Database
 $dbm = new DatabaseAdministration('markets');

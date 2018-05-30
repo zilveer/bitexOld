@@ -29,6 +29,19 @@ class DatabaseAdministration{
         return $arr;
     }
 
+    public function saveSettings($post) {
+        if(empty($post) || !is_array($post)){
+            return array('ERROR' => 'Incorrect or no data received.');
+        }
+
+        // Separa los campos con ,
+        foreach($post as $key => $val){
+            $query = "UPDATE {$this->userTbl} SET value = '{$val}' WHERE name ='{$key}'";
+            $this->db->query($query);
+        }
+        return array('INFO' => 'Changes were saved.');
+    }
+
     public function addPair($data) {
         if( !is_array($data) || empty($data) ) {
             return array('ERROR' => 'Incorrect or no data received.');
